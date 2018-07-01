@@ -1,0 +1,21 @@
+{
+  "game": {
+    "turnOf": "",
+    "players": 0
+  },
+  "players": {
+    "1": {
+      "name": "",
+      "choice": "",
+      "losses": 0,
+      "wins": 0
+    },
+    "2": {
+      "name": "",
+      "choice": "",
+      "losses": 0,
+      "wins": 0
+    }
+  },
+  "chat" : {}
+}

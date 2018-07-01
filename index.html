@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <div id="welcome">
+            <div id="title">
+                <h1>Rock, Paper, Scissors</h1>
+            </div>
+            <div id="hello">
+                <input type="text" id="playerInput">
+                <button id="playerbtn">Start</button>
+            </div>
+            <div id="turnStatus">
+            </div>
+        </div>
+        <div id="player1">
+            <div id="player1name">
+            </div>
+            <div id="player1chose">
+            </div>
+            <div id="player1options">
+            </div>
+        </div>
+        <div id="result">
+        </div>
+        <div id="player2">
+            <div id="player2name">
+            </div>
+            <div id="player2chose">
+            </div>
+            <div id="player2options">
+            </div>
+        </div>
+        <div id="message">
+            <input type="text" id="chatInput">
+            <button id="chatbtn">Send</button>
+            <div id="messages">
+                
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Javascript codes run after DOM elements are loaded -->
+    <!-- https://stackoverflow.com/questions/9778888/uncaught-typeerror-cannot-set-property-onclick-of-null -->
+    <!-- Javascript libraries CDN -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+
+    <script src="assets/js/var.js"></script>
+    <script src="assets/js/objects.js"></script>
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/dom.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
