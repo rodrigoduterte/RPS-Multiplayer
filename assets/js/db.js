@@ -67,12 +67,12 @@ function resetPlayerInfo () {
     game.update({
 
     });
-    player.baseRef.update({
-        choice: "",
-        losses: 0,
-        wins: 0,
-        name: ""
-    });
+    // player.baseRef.update({
+    //     choice: "",
+    //     losses: 0,
+    //     wins: 0,
+    //     name: ""
+    // });
 }
 
 function resetGameInfo () {
@@ -84,7 +84,6 @@ function resetGameInfo () {
 
 players.on('value',function(snap){
     var count = 0;
-    // var arraydb = [];
     var p1c = snap.child('1').val().choice;
     var p1n = snap.child('1').val().name;
     var p2c = snap.child('2').val().choice;
@@ -92,55 +91,37 @@ players.on('value',function(snap){
     // console.log(snap.val());
     snap.forEach(element => {
         if (element.val().name != "") {
-            // arraydb.push(element.key);
             count++;
         }
-        // console.log(element.key + ":" + element.val().choice);
-        // if (element.val().id === "1") {
-        //     console.log("choice1: "+ element.val().choice);
-        //     window.whoWins.setP1choice(element.val().choice);
-        // } else if (toString(element.val().id) === "2") {
-        //     console.log("choice2: "+ element.val().choice);
-        //     window.whoWins.setP2choice(element.val().choice);
-        // }
     });
-    console.log(snap.child('1').val().name + "," + snap.child('1').val().choice);
-    console.log(snap.child('2').val().name + "," + snap.child('2').val().choice);
-    $('#result').val(window.whoWins.compare([p1n,p1c],[p2n,p2c]));
-    // localStorage.setItem('id',arraydb[0]);
-    // localStorage.setItem('name',name);
-    // displayWelcomeText(name,arraydb[0]);
-    // displayPlayer(name,arraydb[0]);
-    // updatePlayerName (name,arraydb[0]);
+    displayResult(window.whoWins.compare([p1n,p1c],[p2n,p2c]));
+    addScore = window.whoWins.score(p1c,p2c);
+    console.log(addScore);
+    if (addScore[0] === 0 && addScore[1] === 1) {
+        addPlayer1Losses();
+        addPlayer2Wins();
+    } else if (addScore[0] === 1 && addScore[1] === 0) {
+        addPlayer1Wins();
+        addPlayer2Losses();
+    }
     game.update({players: parseInt(count)});
-    // console.log(arraydb[0]);
+});
+
+database.ref('players/1/wins').on('value',function(){
+    database.ref('player/1/wins').transaction(function(wins){
+        console.log('run transact1');
+        database.ref('player/1').update({
+            wins: wins + 1
+        });
+        //return parseInt(wins) + 1;
+    })
 });
 
 players.on('child_changed',function(snap){
-    var p1c = snap.child('1').val().choice;
-    var p1n = snap.child('1').val().name;
-    var p2c = snap.child('2').val().choice;
-    var p2n = snap.child('2').val().name;
-    console.log(snap.val());
     displayPlayer(snap.val().name,snap.key);
     displayStatus(snap.key,snap.val().wins,snap.val().losses);
-    displayResult([],[]);
+    // displayResult(window.whoWins.compare([p1n,p1c],[p2n,p2c]));
 });
-
-// database.ref('players/2/choice').on('value',function(snap){
-//     if(snap.val().choice != "") {
-//         var player1choice;
-//         var player2choice = snap.val();
-//         console.log("player1:"+player1choice);
-//         console.log("player2:"+player2choice);
-//         database.ref('players/1').once('value').
-//         then(function(snap){
-//             player1choice = snap.val().choice;
-//         });
-//         console.log(window.whoWins);
-//         window.whoWins.compare(player1choice,player2choice);
-//     }
-// });
 
 function addPlayer() {
     database.ref('players/1').on('value',function(s){
@@ -185,28 +166,34 @@ function addPlayer() {
     });
 }
 
-function createPR(id) {
-    console.log("createPR:"+id);
-    var player1 = database.ref('players/1');
-    var player2 = database.ref('players/2');
-    player.ref1 = player1;
-    player.ref2 = player2;
-    if (id === "1") {
-        player.baseref = player1;
-        player.enemyref = player2;
-    } else if (id === "2") {
-        player.baseref = player2;
-        player.enemyref = player1;
-    }
-    // eventsForPR();
+function addPlayer1Wins () {
+    // database.ref('players/1/wins').on('value',function(){
+        database.ref('player/1').update({
+            wins: database.ref('player/1/wins').transaction(function(wins){return wins + 1;})
+        });
+    // });
 }
 
-// function eventsForPR () {
-//     console.log("eventhandlers:");
-//     player.ref1.on('value',function(snap){
-//         displayPlayer('player1name',snap.val().name);
-//     });
-//     player.ref2.on('value',function(snap){
-//         displayPlayer('player2name',snap.val().name);
-//     });
-// }
+function addPlayer1Losses () {
+    // database.ref('players/1/losses').on('value',function(){
+        database.ref('player/1').update({
+            losses: database.ref('player/1/losses').transaction(function(losses){return losses + 1;})
+        });
+    // });
+}
+
+function addPlayer2Wins () {
+    // database.ref('players/2/wins').on('value',function(){
+        database.ref('player/2/wins').update({
+            wins: database.ref('player/2/wins').transaction(function(wins){return wins + 1;})
+        });
+    // });
+}
+
+function addPlayer2Losses () {
+    // database.ref('players/2/losses').on('value',function(){
+        database.ref('player/2').update({
+            losses: database.ref('player/2/losses').transaction(function(losses){return losses + 1;})
+        });
+    // });
+}

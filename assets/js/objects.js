@@ -3,8 +3,10 @@ player = {
     name: null,
     chose: false,
     choice: null,
-    wins: 0,
-    losses: 0
+    p1wins: 0,
+    p1losses: 0,
+    p2wins: 0,
+    p2losses: 0,
 };
 
 for (var key in player) {
@@ -48,5 +50,18 @@ whoWins = {
             console.log("compare not run");
             return "";
         }
+    },
+    "score" : function (p1,p2) {
+        if (p1 && p2) {
+            if (this[p1].indexOf(p2) === 0) {
+                return [0,0,0,0];
+            } else if (this[p1].indexOf(p2) === 1) {
+                return [0,1,1,0];
+            } else if (this[p1].indexOf(p2) === 2) {
+                return [1,0,0,1];
+            }
+        } else {
+            return [0,0,0,0];
+        } 
     }
 };

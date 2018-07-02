@@ -36,8 +36,6 @@ function displayMessages(key,value){
 }
 
 function displayStatus(id,wins,losses){
-    // var wins = localStorage.getItem('wins');
-    // var losses = localStorage.getItem('losses');
     if (id === "1") {
         document.getElementById('player1status').innerHTML = 'Wins: ' + wins + '; Losses: ' + losses; 
     } else if (id === "2") {
@@ -58,7 +56,6 @@ function eventsToRPS() {
     functionForClickedRPS = function() {
         var id = this.parentNode.getAttribute('id').charAt(6);
         var choice = this.getAttribute("id");
-        console.log('eventstorps:'+id);
         localStorage.setItem('choice',choice);
         localStorage.setItem('chose',true);
         updatePlayerChoice(id,choice);
@@ -93,9 +90,6 @@ function showRPS(){
 function appendRPSToInteract() {
     player1options.innerHTML = RPS;
     var x = document.getElementById("player1options").querySelectorAll("button");
-    // for(var i=0; i<x.length; i++) {
-    // 	x[i].style.background = "red";
-	// }
     player2options.innerHTML = RPS;
     hideAllRPS();
 }
@@ -106,10 +100,6 @@ function appendGreetToHello() {
 }
 
 function hideAllRPS () {
-    // var rps = document.getElementsByClassName("rps");
-    // for (var i = 0; i < rps.length; i++) {
-    //     rps[i].style.display = 'none';
-    // }
     player1options.style.display = 'none';
     player2options.style.display = 'none';
 }
