@@ -9,6 +9,7 @@ var rpsTemplate;
 var rpsData;
 var RPS;
 var greet;
+var whoWins;
 //db.js
 var config;
 var database;
@@ -17,7 +18,6 @@ var gamePlayers;
 var players;
 var chats;
 var numOfplayers;
-var arrayfromdatabase;
 //controls.js
 var playerbtn;
 var chatbtn;
@@ -25,5 +25,5 @@ var playerInput;
 var chatInput;
 var player1waiting;
 var player2waiting;
-var player1interact;
-var player2interact;
+var player1options;
+var player2options;

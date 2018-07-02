@@ -1,37 +1,34 @@
-//refresh button makes the player leave
-// window.onload = function () {
-//     selectControls();
-//     manageControlEvents();
-//     appendGreetToHello();
-//     appendRPSToInteract();
-    
-// };
+selectControls();
+appendGreetToHello();
+appendRPSToInteract();
+eventsToRPS();
 
-$(document).ready(function () {
-    playerbtn = document.getElementById("playerbtn");
-    chatbtn = document.getElementById('chatbtn');
-    // Retrieve display elements
-    player1options = document.getElementById('player1options');
-    player2options = document.getElementById('player2options');
-    // These variables will only be used to replace the value of the div that displays the player name
-    // once a player leaves the game
-    player1waiting = document.getElementById('player1name').value; 
-    player2waiting = document.getElementById('player2name').value; 
-    $("#playerbtn").on('click',function () {
-        player.name = document.getElementById('playerInput').value;
+$(document).ready(function(){
+    // playerbtn.onclick = function() {
+    $('#playerbtn').on('click',function(){
+        var id;
+        var inputval;
+        inputval = $('#playerInput').val();
         console.log("btn");
-        if (player.name != "") {
-            player.id = assignPlayerID();
-            // createPlayerReferences();
-            // updatePlayerName();
-            // displayWelcomeText();
-            // InputControlsSwitch('none');
+        if (inputval != "") {
+            // id = assignPlayerID();
+            addPlayer();
+            // console.log(id);
+            // updatePlayerName(inputval,id);
+            // console.log(localStorage.getItem('id'));
+            InputControlsSwitch('none');
         }
+    });
+    // };
+    $('#chatbtn').on('click',function () {
+        chat.message = $('#chatInput').val();
+        if (chat.message != ""){
+            console.log("ccc");
+            // updateChat();
+        } 
      });
-    appendGreetToHello();
-    appendRPSToInteract();
 });
 
-// window.onbeforeunload = function () {
-//     resetPlayerInfo();
-// };
+window.onunload = () => {
+    localStorage.clear();
+}
