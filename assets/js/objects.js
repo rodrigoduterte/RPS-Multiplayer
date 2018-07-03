@@ -1,12 +1,7 @@
 player = {
     id: null,
     name: null,
-    chose: false,
-    choice: null,
-    p1wins: 0,
-    p1losses: 0,
-    p2wins: 0,
-    p2losses: 0,
+    choice: null
 };
 
 for (var key in player) {
@@ -25,7 +20,6 @@ rpsData = [
     {'name':'Scissors','id':'scissors'}
 ];
 
-// rps = ``;
 RPS = json2html.transform(rpsData,rpsTemplate);
 
 greet = `<p id='greet'></p>`;

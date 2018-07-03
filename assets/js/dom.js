@@ -16,7 +16,7 @@ function InputControlsSwitch(display) {
     document.getElementById("playerbtn").style.display = display;
 }
 
-function displayWelcomeText(name,id){
+function displayWelcomeText(name,id){       
     var greet = document.getElementById('greet');
     greet.innerHTML = 'Hi ' + name + '! You are Player ' + id;
     greet.style.display = 'inline';
@@ -28,7 +28,25 @@ function displayPlayer(name,id){
     } else if (id === "2") {
         document.getElementById('player2name').innerHTML = name;
     }
+}
 
+function displayReminder(msg,id){
+    if (id === "1") {
+        document.getElementById('reminder1').innerHTML = msg;
+    } else if (id === "2") {
+        document.getElementById('reminder2').innerHTML = msg;
+    }
+}
+
+function displayChosen(id,c){
+    if (c) {
+        if (id === "1") {
+            document.getElementById('player1chose').innerHTML = c;
+        }
+        if (id === "2") {
+            document.getElementById('player2chose').innerHTML = c;
+        }
+    }
 }
 
 function displayMessages(key,value){
@@ -57,14 +75,14 @@ function eventsToRPS() {
         var id = this.parentNode.getAttribute('id').charAt(6);
         var choice = this.getAttribute("id");
         localStorage.setItem('choice',choice);
-        localStorage.setItem('chose',true);
         updatePlayerChoice(id,choice);
         if (id === "1") {
             document.getElementById('player1chose').innerHTML = choice;
+            hideAllRPS();
             game.update({turnOf: "2"});
         } else if (id === "2") {
             document.getElementById('player2chose').innerHTML = choice;
-            // game.update({turnOf: "1"});
+            hideAllRPS();
         }
     };
 
@@ -74,16 +92,16 @@ function eventsToRPS() {
 }
 
 function showRPS(){
-    console.log("showRPS");
-    console.log(localStorage.getItem('id'));
     if (parseInt(localStorage.getItem('id')) === 1) {
-        console.log("showRPS2");
         player1options.style.display = 'block';
         player2options.style.display = 'none';
+        $("#reminder1").show();
+        $("#reminder2").hide();
     } else if (parseInt(localStorage.getItem('id')) === 2) {
-        console.log("showRPS3");
         player1options.style.display = 'none';
         player2options.style.display = 'block';
+        $("#reminder1").hide();
+        $("#reminder2").show();
     }
 }
 
