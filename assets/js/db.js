@@ -77,16 +77,12 @@ players.on('value',function(snap){
         addPlayer2Losses();
     }
     game.update({players: parseInt(count)});
-    // setTimeout(function(){
-    //     players.update({
-    //         "1":{
-    //             choice:""
-    //         },
-    //         "2":{
-    //             choice:""
-    //         }
-    //     });
-    // },3000);
+    database.ref('player/1').update({choice:""});
+    database.ref('player/2').update({choice:""});
+
+    setTimeout(function(){
+        
+    },3000);
 });
 
 
